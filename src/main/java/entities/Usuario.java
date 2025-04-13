@@ -10,8 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "users") 
-public class User implements Serializable{
+public class Usuario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -26,11 +25,11 @@ public class User implements Serializable{
 	private String senha;
 	private Integer idade;
 	
-	public User() {
+	public Usuario() {
 		
 	}
 	
-	public User(String name, String sobrenome, String email, String login, String senha, Integer idade) {
+	public Usuario(String name, String sobrenome, String email, String login, String senha, Integer idade) {
 		this.name = name;
 		this.sobrenome = sobrenome;
 		this.email = email;
@@ -108,7 +107,7 @@ public class User implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Usuario other = (Usuario) obj;
 		return Objects.equals(email, other.email) && id == other.id && Objects.equals(idade, other.idade)
 				&& Objects.equals(login, other.login) && Objects.equals(name, other.name)
 				&& Objects.equals(senha, other.senha) && Objects.equals(sobrenome, other.sobrenome);
