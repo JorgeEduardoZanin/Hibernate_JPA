@@ -1,19 +1,21 @@
 package pos_java_maven_hibernate.pos_java_maven_hibernate;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
 import dao.DaoGeneric;
+import entities.Telefone;
 import entities.Usuario;
-import util.HibernateUtil;
+
 
 
 public class testeHibernate<E> {
 	
-	private static final int E = 0;
 	private DaoGeneric<Usuario> daoUser = new DaoGeneric<Usuario>();
+	private DaoGeneric<Telefone> daoTel = new DaoGeneric<Telefone>();
 	
 	@Test
 	public void testeHibernateUtil() {
@@ -99,7 +101,35 @@ public class testeHibernate<E> {
 		System.out.println(somaIdade);
 	}
 	
+	@Test
+	public void namedQueryUser() {
+		
+		List<Usuario> listaUser = daoUser.getEntityManager().createNamedQuery("usuario.findAll").getResultList();
+		
+		for(Usuario usuario : listaUser) {
+			
+			System.out.println(usuario);
+		}
+	}
 	
+	@Test
+	public void relacionamentoHibernate() {
+		
+		Usuario user = new Usuario("Milena", "Victoria", "teste@gmail.com", "mariache", "12345678",13);
+		
+		user.setId(1L); 
+		Usuario userBuscado = daoUser.buscar(user);
+		
+	
+		
+
+			Telefone tel = new Telefone("Celular", "(42) 9 9883-5513", userBuscado);
+	
+	
+		
+			daoTel.Salvar(tel);
+		
+	}
 	
 
 }

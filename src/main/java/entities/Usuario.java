@@ -1,15 +1,25 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+
 
 @Entity
+@NamedQueries({
+	
+	@NamedQuery(name = "usuario.findAll", query = "SELECT u FROM Usuario u")
+	
+})
 public class Usuario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -24,6 +34,9 @@ public class Usuario implements Serializable{
 	private String login;
 	private String senha;
 	private Integer idade;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Telefone> telefone;
 	
 	public Usuario() {
 		
@@ -92,6 +105,14 @@ public class Usuario implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public List<Telefone> getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(List<Telefone> telefone) {
+		this.telefone = telefone;
 	}
 
 	@Override
